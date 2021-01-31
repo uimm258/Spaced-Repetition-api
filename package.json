@@ -1,35 +1,47 @@
 {
-  "name": "express-boilerplate",
-  "version": "0.0.1",
+  "name": "noteful_server",
+  "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
-    "migrate": "postgrator --config postgrator-config.js",
     "start": "node src/server.js",
     "predeploy": "npm audit",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku master",
+    "postdeploy": "npm run migrate:production",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:test": "env NODE_ENV=test npm run migrate",
+    "migrate:production": "heroku run npm run migrate"
   },
   "keywords": [],
-  "author": "Tom `tomatao` HT <tomht@thinkful.com>",
-  "license": "MIT",
+  "engines": {
+    "node": "12.18.4"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
-    "helmet": "^3.15.0",
-    "jsonwebtoken": "^8.5.0",
-    "knex": "^0.16.3",
-    "morgan": "^1.9.1",
-    "pg": "^7.8.2"
+    "dotenv": "^8.2.0",
+    "eslint": "^7.11.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.8",
+    "morgan": "^1.10.0",
+    "node-pg-migrate": "^5.9.0",
+    "pg": "^8.5.1",
+    "postgrator-cli": "^3.3.0",
+    "winston": "^3.3.3",
+    "xss": "^1.0.8"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.9",
-    "postgrator-cli": "^3.1.0",
-    "supertest": "^3.3.0"
+    "mocha": "^8.2.0",
+    "nodemon": "^2.0.6",
+    "supertest": "^5.0.0",
+    "winston": "^3.3.3"
   }
 }
