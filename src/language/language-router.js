@@ -6,7 +6,9 @@ const LinkedList = require('./linked-list');
 const languageRouter = express.Router();
 const jsonBodyParser = express.json();
 
-languageRouter.use(requireAuth).use(async (req, res, next) => {
+languageRouter
+.use(requireAuth)
+.use(async (req, res, next) => {
   try {
     const language = await LanguageService.getUsersLanguage(
       req.app.get('db'),

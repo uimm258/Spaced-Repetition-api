@@ -30,7 +30,7 @@ VALUES
   (7, 1, '熊猫', 'panda', 8),
   (8, 1, '老鹰', 'eagle', null),
   (9, 1, '编程', 'coding', null),
-  (10, 1, '电视', 'television', null)
+  (10, 1, '电视', 'television', null);
 
 UPDATE "language" SET head = 1 WHERE id = 1;
 
