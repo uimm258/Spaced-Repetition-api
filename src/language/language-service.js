@@ -10,7 +10,7 @@ const LanguageService = {
         'language.total_score'
       )
       .where('language.user_id', user_id)
-      .first();
+      .first()
   },
 
   getLanguageWords(db, language_id) {
@@ -26,7 +26,7 @@ const LanguageService = {
         'correct_count',
         'incorrect_count'
       )
-      .where({ language_id });
+      .where({ language_id })
   },
 
   getNextWord(db, language_id, user_id) {
@@ -39,8 +39,8 @@ const LanguageService = {
         'word.incorrect_count as wordIncorrectCount'
       )
       .join('language', 'language.id', '=', 'word.language_id')
-      .join('users', 'users.id', '=', 'language.user_id')
-      .where('users.id', user_id)
+      .join('user', 'user.id', '=', 'language.user_id')
+      .where('user.id', user_id)
       .andWhere('word.language_id', language_id)
       .whereRaw('word.id = language.head')
       .first()
@@ -49,21 +49,21 @@ const LanguageService = {
         'wordCorrectCount',
         'wordIncorrectCount',
         'totalScore'
-      );
+      )
   },
 
   getWord(db, id) {
     return db
       .from('word')
       .select('*')
-      .where('word.id', id);
+      .where('word.id', id)
   },
 
   getHeadNode(db, head) {
     return db
       .select('*')
       .from('word')
-      .where('word.id', head);
+      .where('word.id', head)
   },
 
   getScore(db, user_id, language_id) {
@@ -72,7 +72,7 @@ const LanguageService = {
       .from('language')
       .where('language.user_id', user_id)
       .andWhere('language.id', language_id)
-      .first();
+      .first()
   },
 
   updateNext(db, language_id, word_id, nextNode) {
@@ -82,7 +82,7 @@ const LanguageService = {
       .andWhere('word.id', word_id)
       .update({
         next: nextNode !== null ? nextNode : null,
-      });
+      })
   },
 
   updateHead(db, language_id, newHead) {
@@ -90,7 +90,7 @@ const LanguageService = {
       .where('language.id', language_id)
       .update({
         head: newHead,
-      });
+      })
   },
 
   updateWord(db, language_id, word_id, memVal, wordCorrect, wordIncorrect) {
@@ -101,7 +101,7 @@ const LanguageService = {
         memory_value: memVal,
         incorrect_count: wordIncorrect,
         correct_count: wordCorrect,
-      });
+      })
   },
 
   updateTotalScore(db, language_id, user_id, newTotal) {
@@ -110,8 +110,8 @@ const LanguageService = {
       .andWhere('language.id', language_id)
       .update({
         total_score: newTotal,
-      });
+      })
   },
-};
+}
 
-module.exports = LanguageService;
+module.exports = LanguageService

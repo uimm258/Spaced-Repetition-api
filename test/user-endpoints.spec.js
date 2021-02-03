@@ -172,7 +172,7 @@ describe('User Endpoints', function () {
           name: 'test name',
         }
         const expectedList = {
-          name: 'French',
+          name: 'Chinese',
           total_score: 0,
           words: [
             { original: '练习', translation: 'exercise' },
